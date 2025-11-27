@@ -5,518 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>9-A sinf Dars Jadvali</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #f8f9fc 0%, #eef2f7 100%);
-            color: #2c3e50;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-            animation: fadeIn 0.8s ease-out;
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 16px;
-            padding: 30px 20px;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05);
-            border: 1px solid rgba(236, 240, 241, 0.8);
-            backdrop-filter: blur(4px);
-        }
-
-        .header h1 {
-            font-size: 2.8rem;
-            font-weight: 300;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            color: #7f8c8d;
-            font-weight: 300;
-            margin-bottom: 5px;
-        }
-
-        /* Sana va vaqt uchun yangi uslublar */
-        .datetime-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-
-        .date-box, .time-box {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px 25px;
-            border-radius: 12px;
-            border: 1px solid #e0e7ff;
-            transition: all 0.3s ease;
-            min-width: 140px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-        }
-
-        .date-box:hover, .time-box:hover {
-            transform: translateY(-3px);
-            border-color: #3498db;
-            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.15);
-        }
-
-        .date-label, .time-label {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-
-        .date-value, .time-value {
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: #2c3e50;
-        }
-
-        .time-value {
-            color: #3498db;
-            font-size: 1.5rem;
-        }
-
-        .weekday {
-            color: #3498db;
-            font-weight: 500;
-        }
-
-        @media (max-width: 768px) {
-            .datetime-container {
-                gap: 15px;
-            }
-            
-            .date-box, .time-box {
-                padding: 12px 20px;
-                min-width: 120px;
-            }
-            
-            .date-value, .time-value {
-                font-size: 1.1rem;
-            }
-            
-            .time-value {
-                font-size: 1.3rem;
-            }
-            
-            .header h1 {
-                font-size: 2.2rem;
-            }
-        }
-
-        .week-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .day-section {
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05);
-            animation: slideUp 0.6s ease-out;
-            animation-fill-mode: both;
-            border: 1px solid rgba(236, 240, 241, 0.8);
-            backdrop-filter: blur(4px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .day-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.1);
-        }
-
-        .day-section:nth-child(1) { animation-delay: 0.1s; }
-        .day-section:nth-child(2) { animation-delay: 0.2s; }
-        .day-section:nth-child(3) { animation-delay: 0.3s; }
-        .day-section:nth-child(4) { animation-delay: 0.4s; }
-        .day-section:nth-child(5) { animation-delay: 0.5s; }
-        .day-section:nth-child(6) { animation-delay: 0.6s; }
-
-        .day-title {
-            font-size: 1.6rem;
-            font-weight: 500;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            text-align: center;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e0e7ff;
-            position: relative;
-        }
-
-        .day-title::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 30%;
-            right: 30%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, #3498db, transparent);
-        }
-
-        .classes-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .class-card {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid #e0e7ff;
-            border-radius: 12px;
-            padding: 18px 15px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-        }
-
-        .class-card:hover {
-            border-color: #3498db;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.15);
-        }
-
-        .class-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.05), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .class-card:hover::before {
-            left: 100%;
-        }
-
-        .class-number {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-
-        .class-name {
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: #2c3e50;
-            margin-bottom: 4px;
-        }
-
-        .class-time {
-            font-size: 0.9rem;
-            color: #3498db;
-            font-weight: 400;
-        }
-
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px 30px;
-            max-width: 450px;
-            width: 90%;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-            transform: scale(0.9) translateY(20px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(224, 231, 255, 0.6);
-            backdrop-filter: blur(12px);
-        }
-
-        .modal-overlay.active .modal {
-            transform: scale(1) translateY(0);
-        }
-
-        .modal-content {
-            text-align: center;
-        }
-
-        .modal-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 25px;
-            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
-        }
-
-        .modal-icon::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-        }
-
-        .modal:hover .modal-icon::before {
-            transform: rotate(45deg) translate(50%, 50%);
-        }
-
-        .modal-icon svg {
-            width: 32px;
-            height: 32px;
-            fill: white;
-            position: relative;
-            z-index: 1;
-        }
-
-        .modal-subject {
-            font-size: 1.8rem;
-            font-weight: 500;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .modal-teacher {
-            font-size: 1.3rem;
-            color: #3498db;
-            margin-bottom: 25px;
-            font-weight: 400;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .modal-teacher::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 30%;
-            right: 30%;
-            height: 1px;
-            background: linear-gradient(to right, transparent, #e0e7ff, transparent);
-        }
-
-        .modal-time {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e0e7ff;
-        }
-
-        .time-box {
-            text-align: center;
-            flex: 1;
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(236, 240, 241, 0.3);
-            transition: all 0.3s ease;
-            margin: 0 8px;
-        }
-
-        .time-box:hover {
-            background: rgba(52, 152, 219, 0.1);
-            transform: scale(1.05);
-        }
-
-        .time-label {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-
-        .time-value {
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: #2c3e50;
-        }
-
-        .modal-close {
-            margin-top: 30px;
-            padding: 12px 35px;
-            background: linear-gradient(to right, #3498db, #2c3e50);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .modal-close:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
-        }
-
-        .modal-close::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 20px;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(25deg);
-            transition: all 0.6s ease;
-        }
-
-        .modal-close:hover::after {
-            left: 120%;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 25px;
-            color: #7f8c8d;
-            font-size: 0.95rem;
-            font-weight: 400;
-            animation: fadeIn 1s ease-out;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 12px;
-            max-width: 400px;
-            margin: 0 auto;
-            backdrop-filter: blur(4px);
-        }
-
-        .footer a {
-            color: #3498db;
-            text-decoration: none;
-            position: relative;
-            font-weight: 500;
-        }
-
-        .footer a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: #3498db;
-            transition: width 0.3s ease;
-        }
-
-        .footer a:hover::after {
-            width: 100%;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
-            }
-            
-            .week-container {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            
-            .classes-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .modal {
-                padding: 30px 20px;
-            }
-            
-            .modal-time {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .time-box {
-                margin: 0;
-            }
-        }
-
-        /* Loading animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        /* Sizning oldingi stillaringiz o‘zgarmadi */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:linear-gradient(135deg,#f8f9fc 0%,#eef2f7 100%);color:#2c3e50;line-height:1.6;min-height:100vh}
+        .container{max-width:1400px;margin:0 auto;padding:40px 20px}
+        .header{text-align:center;margin-bottom:50px;animation:fadeIn .8s ease-out;background:rgba(255,255,255,.85);border-radius:16px;padding:30px 20px;box-shadow:0 8px 32px rgba(31,38,135,.05);border:1px solid rgba(236,240,241,.8);backdrop-filter:blur(4px)}
+        .header h1{font-size:2.8rem;font-weight:300;color:#2c3e50;margin-bottom:10px;letter-spacing:-.5px}
+        .header p{font-size:1.2rem;color:#7f8c8d;font-weight:300;margin-bottom:5px}
+        .datetime-container{display:flex;justify-content:center;gap:30px;margin-top:20px;flex-wrap:wrap}
+        .date-box,.time-box{background:rgba(255,255,255,.95);padding:15px 25px;border-radius:12px;border:1px solid #e0e7ff;transition:all .3s ease;min-width:140px;box-shadow:0 4px 12px rgba(0,0,0,.03)}
+        .date-box:hover,.time-box:hover{transform:translateY(-3px);border-color:#3498db;box-shadow:0 8px 20px rgba(52,152,219,.15)}
+        .date-label,.time-label{font-size:.85rem;color:#7f8c8d;margin-bottom:5px;font-weight:500}
+        .date-value,.time-value{font-size:1.3rem;font-weight:500;color:#2c3e50}
+        .time-value{color:#3498db;font-size:1.5rem}
+        .weekday{color:#3498db;font-weight:500}
+        @media (max-width:768px){.datetime-container{gap:15px}.date-box,.time-box{padding:12px 20px;min-width:120px}.date-value,.time-value{font-size:1.1rem}.time-value{font-size:1.3rem}.header h1{font-size:2.2rem}}
+        .week-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:30px;margin-bottom:50px}
+        .day-section{background:rgba(255,255,255,.85);border-radius:16px;padding:25px;box-shadow:0 8px 32px rgba(31,38,135,.05);animation:slideUp .6s ease-out;animation-fill-mode:both;border:1px solid rgba(236,240,241,.8);backdrop-filter:blur(4px);transition:transform .3s ease,box-shadow .3s ease}
+        .day-section:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(31,38,135,.1)}
+        .day-section:nth-child(1){animation-delay:.1s}
+        .day-section:nth-child(2){animation-delay:.2s}
+        .day-section:nth-child(3){animation-delay:.3s}
+        .day-section:nth-child(4){animation-delay:.4s}
+        .day-section:nth-child(5){animation-delay:.5s}
+        .day-section:nth-child(6){animation-delay:.6s}
+        .day-title{font-size:1.6rem;font-weight:500;color:#2c3e50;margin-bottom:20px;text-align:center;padding-bottom:15px;border-bottom:1px solid #e0e7ff;position:relative}
+        .day-title::after{content:'';position:absolute;bottom:-1px;left:30%;right:30%;height:2px;background:linear-gradient(to right,transparent,#3498db,transparent)}
+        .classes-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .class-card{background:rgba(255,255,255,.95);border:1px solid #e0e7ff;border-radius:12px;padding:18px 15px;cursor:pointer;transition:all .3s cubic-bezier(.25,.8,.25,1);text-align:center;position:relative;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.03)}
+        .class-card:hover{border-color:#3498db;transform:translateY(-3px);box-shadow:0 8px 20px rgba(52,152,219,.15)}
+        .class-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(52,152,219,.05),transparent);transition:left .6s ease}
+        .class-card:hover::before{left:100%}
+        .class-number{font-size:.85rem;color:#7f8c8d;margin-bottom:5px;font-weight:500}
+        .class-name{font-size:1.05rem;font-weight:500;color:#2c3e50;margin-bottom:4px}
+        .class-time{font-size:.9rem;color:#3498db;font-weight:400}
+        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s ease;z-index:1000;backdrop-filter:blur(5px)}
+        .modal-overlay.active{opacity:1;visibility:visible}
+        .modal{background:rgba(255,255,255,.95);border-radius:20px;padding:40px 30px;max-width:450px;width:90%;box-shadow:0 25px 50px -12px rgba(0,0,0,.15);transform:scale(.9) translateY(20px);transition:all .4s cubic-bezier(.175,.885,.32,1.275);border:1px solid rgba(224,231,255,.6);backdrop-filter:blur(12px)}
+        .modal-overlay.active .modal{transform:scale(1) translateY(0)}
+        .modal-content{text-align:center}
+        .modal-icon{width:70px;height:70px;margin:0 auto 25px;background:linear-gradient(135deg,#3498db 0%,#2c3e50 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 10px 20px rgba(52,152,219,.2)}
+        .modal-icon::before{content:'';position:absolute;width:100%;height:100%;background:rgba(255,255,255,.2);transform:rotate(45deg);transition:all .5s ease}
+        .modal:hover .modal-icon::before{transform:rotate(45deg) translate(50%,50%)}
+        .modal-icon svg{width:32px;height:32px;fill:white;position:relative;z-index:1}
+        .modal-subject{font-size:1.8rem;font-weight:500;color:#2c3e50;margin-bottom:10px}
+        .modal-teacher{font-size:1.3rem;color:#3498db;margin-bottom:25px;font-weight:400;position:relative;padding-bottom:15px}
+        .modal-teacher::after{content:'';position:absolute;bottom:0;left:30%;right:30%;height:1px;background:linear-gradient(to right,transparent,#e0e7ff,transparent)}
+        .modal-time{display:flex;justify-content:space-between;margin-top:20px;padding-top:20px;border-top:1px solid #e0e7ff}
+        .modal-time .time-box{text-align:center;flex:1;padding:10px;border-radius:10px;background:rgba(236,240,241,.3);transition:all .3s ease;margin:0 8px}
+        .modal-time .time-box:hover{background:rgba(52,152,219,.1);transform:scale(1.05)}
+        .modal-time .time-label{font-size:.9rem;color:#7f8c8d;margin-bottom:5px;font-weight:500}
+        .modal-time .time-value{font-size:1.3rem;font-weight:500;color:#2c3e50}
+        .modal-close{margin-top:30px;padding:12px 35px;background:linear-gradient(to right,#3498db,#2c3e50);color:white;border:none;border-radius:25px;font-size:1rem;cursor:pointer;transition:all .3s ease;font-weight:500;letter-spacing:.5px;position:relative;overflow:hidden}
+        .modal-close:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(52,152,219,.3)}
+        .modal-close::after{content:'';position:absolute;top:-50%;left:-60%;width:20px;height:200%;background:rgba(255,255,255,.3);transform:rotate(25deg);transition:all .6s ease}
+        .modal-close:hover::after{left:120%}
+        .footer{text-align:center;padding:25px;color:#7f8c8d;font-size:.95rem;font-weight:400;animation:fadeIn 1s ease-out;background:rgba(255,255,255,.7);border-radius:12px;max-width:400px;margin:0 auto;backdrop-filter:blur(4px)}
+        .footer a{color:#3498db;text-decoration:none;position:relative;font-weight:500}
+        .footer a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#3498db;transition:width .3s ease}
+        .footer a:hover::after{width:100%}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        @media (max-width:768px){.week-container{grid-template-columns:1fr;gap:25px}.classes-grid{grid-template-columns:1fr}.modal{padding:30px 20px}.modal-time{flex-direction:column;gap:10px}.modal-time .time-box{margin:0}}
+        .loading{display:inline-block;width:20px;height:20px;border:2px solid #f3f3f3;border-top:2px solid #3498db;border-radius:50%;animation:spin 1s linear infinite}
+        @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
     </style>
 </head>
 <body>
@@ -524,27 +76,19 @@
         <header class="header">
             <h1>9-A sinf Dars Jadvali</h1>
             <p>2024-2025 o'quv yili</p>
-            
-            <!-- Sana va vaqt -->
             <div class="datetime-container">
                 <div class="date-box">
                     <div class="date-label">Bugun</div>
-                    <div class="date-value" id="currentDate">
-                        <span class="loading"></span>
-                    </div>
+                    <div class="date-value" id="currentDate"><span class="loading"></span></div>
                 </div>
                 <div class="time-box">
                     <div class="time-label">Soat</div>
-                    <div class="time-value" id="currentTime">
-                        <span class="loading"></span>
-                    </div>
+                    <div class="time-value" id="currentTime"><span class="loading"></span></div>
                 </div>
             </div>
         </header>
 
-        <div class="week-container" id="weekContainer">
-            <!-- Dars jadvali JavaScript orqali yaratiladi -->
-        </div>
+        <div class="week-container" id="weekContainer"></div>
 
         <footer class="footer">
             <p>Created by <a href="https://t.me/asrorbotir0v" target="_blank">Asror.botir0v</a></p>
@@ -556,21 +100,13 @@
         <div class="modal">
             <div class="modal-content">
                 <div class="modal-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                 </div>
                 <h2 class="modal-subject" id="modalSubject">Fan nomi</h2>
                 <p class="modal-teacher" id="modalTeacher">Ustoz ismi</p>
                 <div class="modal-time">
-                    <div class="time-box">
-                        <div class="time-label">Kirish</div>
-                        <div class="time-value" id="modalStartTime">--:--</div>
-                    </div>
-                    <div class="time-box">
-                        <div class="time-label">Chiqish</div>
-                        <div class="time-value" id="modalEndTime">--:--</div>
-                    </div>
+                    <div class="time-box"><div class="time-label">Kirish</div><div class="time-value" id="modalStartTime">--:--</div></div>
+                    <div class="time-box"><div class="time-label">Chiqish</div><div class="time-value" id="modalEndTime">--:--</div></div>
                 </div>
                 <button class="modal-close" onclick="closeModal()">Yopish</button>
             </div>
@@ -578,166 +114,112 @@
     </div>
 
     <script>
-        // Dars jadvali ma'lumotlari
         const schedule = {
             'Dushanba': [
-                { number: 1, name: 'Kelajak soati', teacher: 'Abdrimov R. A, start: '08:30', end: '09:15' },
-                { number: 2, name: 'Informatika', teacher: 'Matyaqubov A. Z., start: '09:20', end: '10:05' },
+                { number: 1, name: 'Kelajak soati', teacher: 'Abdrimov R. A.', start: '08:30', end: '09:15' },
+                { number: 2, name: 'Informatika', teacher: 'Matyaqubov A. Z.', start: '09:20', end: '10:05' },
                 { number: 3, name: 'Algebra', teacher: 'Madrimov R. X.', start: '10:10', end: '10:55' },
                 { number: 4, name: 'Ona tili', teacher: 'Ismoilova Z. R.', start: '11:00', end: '11:45' },
-                { number: 5, name: 'J. tarbiya ', teacher: 'Madaminov G. A., start: '11:50', end: '12:35' },
+                { number: 5, name: 'J. tarbiya', teacher: 'Madaminov G. A.', start: '11:50', end: '12:35' },
             ],
             'Seshanba': [
-                { number: 1, name: 'Biologiya', teacher: 'Tangriyev G.M ', start: '08:30', end: '09:15' },
+                { number: 1, name: 'Biologiya', teacher: 'Tangriyev G.M', start: '08:30', end: '09:15' },
                 { number: 2, name: 'DHA', teacher: 'Jumaniyozova M.', start: '09:20', end: '10:05' },
                 { number: 3, name: 'Fizika', teacher: 'Abdiyazov M.', start: '10:10', end: '10:55' },
                 { number: 4, name: 'Ingiliz tili', teacher: 'Nurullayev D. S.', start: '11:10', end: '11:45' },
                 { number: 5, name: 'Geometriya', teacher: 'Madrimov R. X.', start: '12:05', end: '12:45' },
-                { number: 6,name: 'Informatika', teacher: 'Matyaqubov A. Z., start:'12:40', end: '13:25' }
+                { number: 6, name: 'Informatika', teacher: 'Matyaqubov A. Z.', start: '12:40', end: '13:25' }
             ],
             'Chorshanba': [
                 { number: 1, name: 'Ona tili', teacher: 'Ismoilova Z. R.', start: '08:30', end: '09:15' },
-                { number: 2, name: 'UZBEK tarix', teacher: 'Abdullayev Z. G., start: '09:20', end: '10:05' },
-                { number: 3, name:  'Ingiliz tili', teacher: 'Nurullayev D. S.',  start: '10:10', end: '10:55' },
+                { number: 2, name: 'UZBEK tarix', teacher: 'Abdullayev Z. G.', start: '09:20', end: '10:05' },
+                { number: 3, name: 'Ingiliz tili', teacher: 'Nurullayev D. S.', start: '10:10', end: '10:55' },
                 { number: 4, name: 'Algebra', teacher: 'Madrimov R. X.', start: '11:00', end: '11:45' },
                 { number: 5, name: 'Texnalogiya', teacher: 'Qalandarov M. Y.', start: '11:50', end: '12:35' },
-                { number: 6, name: 'J. tarbiya ', teacher: 'Madaminov G. A., start: '12:55', end: '13:35' }
+                { number: 6, name: 'J. tarbiya', teacher: 'Madaminov G. A.', start: '12:55', end: '13:35' }
             ],
             'Payshanba': [
                 { number: 1, name: 'Adabiyot', teacher: 'Ismoilova Z. R.', start: '08:30', end: '09:15' },
                 { number: 2, name: 'Kimyo', teacher: 'Egamova U. B.', start: '09:20', end: '10:05' },
                 { number: 3, name: 'Fizika', teacher: 'Abdiyazov M.', start: '10:10', end: '10:55' },
-                { number: 4, name:'Ingiliz tili', teacher: 'Nurullayev D. S.',  start: '11:00', end: '11:45' },
+                { number: 4, name: 'Ingiliz tili', teacher: 'Nurullayev D. S.', start: '11:00', end: '11:45' },
                 { number: 5, name: 'Rus tili', teacher: 'Nazarov J. B.', start: '11:50', end: '12:35' },
                 { number: 6, name: 'Geometriya', teacher: 'Madrimov R. X.', start: '12:40', end: '13:25' }
             ],
             'Juma': [
                 { number: 1, name: 'Rus tili', teacher: 'Nazarov J. B.', start: '08:30', end: '09:15' },
                 { number: 2, name: 'Ona tili', teacher: 'Ismoilova Z. R.', start: '09:20', end: '10:05' },
-                { number: 3,name: 'Geometriya', teacher: 'Madrimov R. X.', start: '10:10', end: '10:55' },
+                { number: 3, name: 'Geometriya', teacher: 'Madrimov R. X.', start: '10:10', end: '10:55' },
                 { number: 4, name: 'Chizmachilik', teacher: 'Jumaniyozova M.', start: '11:00', end: '11:45' },
                 { number: 5, name: 'Jahon tarix', teacher: 'Abdullayev Z. G.', start: '11:50', end: '12:35' },
                 { number: 6, name: 'Geografiya', teacher: 'Nosirova U. P.', start: '12:40', end: '13:25' }
             ],
             'Shanba': [
-                { number: 1, name: 'UZBEK tarix', teacher: 'Abdullayev Z. G., start: '08:30', end: '09:15' },
+                { number: 1, name: 'UZBEK tarix', teacher: 'Abdullayev Z. G.', start: '08:30', end: '09:15' },
                 { number: 2, name: 'Algebra', teacher: 'Madrimov R. X.', start: '09:20', end: '10:05' },
-                { number: 3, name: 'Biologiya', teacher: 'Tangriyev G.M ' start: '10:10', end: '10:55' },
+                { number: 3, name: 'Biologiya', teacher: 'Tangriyev G.M', start: '10:10', end: '10:55' },
                 { number: 4, name: 'Adabiyot', teacher: 'Ismoilova Z. R.', start: '11:00', end: '11:45' },
                 { number: 5, name: 'Kimyo', teacher: 'Egamova U. B.', start: '11:50', end: '12:35' },
                 { number: 6, name: 'Tarbiya', teacher: 'Abdullayeva M. Q.', start: '12:40', end: '13:25' }
             ]
         };
 
-        // O'zbek tilidagi kun va oy nomlari
         const weekDays = ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba'];
         const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr'];
 
-        // Sana va vaqtni yangilash
         function updateDateTime() {
             const now = new Date();
             const day = weekDays[now.getDay()];
             const date = now.getDate();
             const month = months[now.getMonth()];
             const year = now.getFullYear();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-
-            document.getElementById('currentDate').innerHTML = 
-                `${date} ${month} ${year}, <span class="weekday">${day}</span>`;
-            document.getElementById('currentTime').textContent = `${hours}:${minutes}:${seconds}`;
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('currentDate').innerHTML = `${date} ${month} ${year}, <span class="weekday">${day}</span>`;
+            document.getElementById('currentTime').textContent = `${h}:${m}:${s}`;
         }
-
-        // Har soniya vaqtni yangilash
         setInterval(updateDateTime, 1000);
-        updateDateTime(); // Birinchi marta chaqirish
+        updateDateTime();
 
-        // Dars jadvalini yaratish
         function createSchedule() {
             const container = document.getElementById('weekContainer');
-            
             Object.entries(schedule).forEach(([day, classes]) => {
-                const daySection = document.createElement('div');
-                daySection.className = 'day-section';
-                
-                const dayTitle = document.createElement('h2');
-                dayTitle.className = 'day-title';
-                dayTitle.textContent = day;
-                
-                const classesGrid = document.createElement('div');
-                classesGrid.className = 'classes-grid';
-                
-                classes.forEach(lesson => {
-                    const classCard = document.createElement('div');
-                    classCard.className = 'class-card';
-                    classCard.onclick = () => openModal(lesson);
-                    
-                    classCard.innerHTML = `
-                        <div class="class-number">${lesson.number} - dars</div>
-                        <div class="class-name">${lesson.name}</div>
-                        <div class="class-time">${lesson.start} - ${lesson.end}</div>
-                    `;
-                    
-                    classesGrid.appendChild(classCard);
+                const section = document.createElement('div');
+                section.className = 'day-section';
+                section.innerHTML = `<h2 class="day-title">${day}</h2><div class="classes-grid"></div>`;
+                const grid = section.querySelector('.classes-grid');
+                classes.forEach(l => {
+                    const card = document.createElement('div');
+                    card.className = 'class-card';
+                    card.onclick = () => openModal(l);
+                    card.innerHTML = `<div class="class-number">${l.number} - dars</div><div class="class-name">${l.name}</div><div class="class-time">${l.start} - ${l.end}</div>`;
+                    grid.appendChild(card);
                 });
-                
-                daySection.appendChild(dayTitle);
-                daySection.appendChild(classesGrid);
-                container.appendChild(daySection);
+                container.appendChild(section);
             });
         }
 
-        // Modalni ochish
-        function openModal(lesson) {
-            const modal = document.getElementById('modalOverlay');
-            document.getElementById('modalSubject').textContent = lesson.name;
-            document.getElementById('modalTeacher').textContent = lesson.teacher;
-            document.getElementById('modalStartTime').textContent = lesson.start;
-            document.getElementById('modalEndTime').textContent = lesson.end;
-            
-            modal.classList.add('active');
+        function openModal(l) {
+            document.getElementById('modalSubject').textContent = l.name;
+            document.getElementById('modalTeacher').textContent = l.teacher;
+            document.getElementById('modalStartTime').textContent = l.start;
+            document.getElementById('modalEndTime').textContent = l.end;
+            document.getElementById('modalOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-
-        // Modalni yopish
         function closeModal() {
-            const modal = document.getElementById('modalOverlay');
-            modal.classList.remove('active');
+            document.getElementById('modalOverlay').classList.remove('active');
             document.body.style.overflow = 'auto';
         }
+        document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-        // Modalni tasodifiy joyga bosishni yopish
-        document.getElementById('modalOverlay').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // ESC tugmasi orqali yopish
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Sahifa yuklanganda dars jadvalini yaratish
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
             createSchedule();
-            
-            // Yuklanish animatsiyasi
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-        });
-
-        // Sahifani yuklash animatsiyasi
-        document.addEventListener('DOMContentLoaded', function() {
             document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
+            document.body.style.transition = 'opacity .5s ease';
+            setTimeout(() => document.body.style.opacity = '1', 100);
         });
     </script>
 </body>
